@@ -63,7 +63,7 @@ export const handleRequest: HandleRequest = async function (request: HttpRequest
     response.grid = internalGame.grid;
     response.currentRow = internalGame.currentRow;
     response.solved = internalGame.solved;
-    response.message = "New game started";
+    response.message = "The game has started, start guessing the word";
 
     return {
       status: 200,
@@ -72,10 +72,18 @@ export const handleRequest: HandleRequest = async function (request: HttpRequest
     };
   }
 
-  if (request.uri.toLowerCase().includes("/api/guess") && request.method === "POST") {
-    const body = JSON.parse(new TextDecoder().decode(request.body));
-    const id = body.gameId;
-    const guess = body.guess;
+  if (request.uri.toLowerCase().includes("/api/guess") && request.method === "GET") {
+    const url = new URL(request.uri, `http://${request.headers.host}`);
+    const id = url.searchParams.get("gameId");
+    const guess = url.searchParams.get("guess");
+
+    if (!id || !guess) {
+      return {
+        status: 400,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ message: "Missing gameId or guess in the query parameters" })
+      };
+    }
 
     try {
       internalGame = await store.getJson(id);

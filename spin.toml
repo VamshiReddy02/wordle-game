@@ -19,6 +19,7 @@ source = "target/wordle-game.wasm"
 exclude_files = ["**/node_modules"]
 key_value_stores = ["default"]
 allowed_outbound_hosts = []
+ai_models = ["llama2-chat"]
 
 [component.wordle-game.build]
 command = "npm run build"

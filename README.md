@@ -1,20 +1,45 @@
-## HTTP-TS template
+# Challenge 3 - 2024
 
-This is a simple template to get started with spin-js-sdk using typescript.
+Welcome to the third challenge of Fermyon’s Summer of Spin 2024! 🥳
 
-### Build
+For this challenge you'll need to use:
 
-```console
-npm install
-spin build
+- Spin CLI
+- Your favorite programming [language](https://www.fermyon.com/wasm-languages/webassembly-language-support/) supported in Spin
+- Working with Spin's key-value store.
+- Fermyon cloud or spinkube
+
+## Spec
+
+It's summertime, the perfect season for fun and engaging activities. Summertime is all about traveling, spending time with loved ones, and exploring new things. However, due to heatwaves, it can be challenging to go outside and explore. So, what can we do at home to kill boredom? Don't worry, we've got you covered. Let's make a game! Your challenge this week is to create and solve the popular game called WORDLE.
+
+The game is pretty straightforward. In this game, players are tasked with guessing a hidden five-letter word from a predefined dictionary. Each guess must be a valid five-letter word, and the game provides feedback on the accuracy of your guess. If you guess the correct word, congratulations! You've solved the puzzle. If not, you can keep trying until you use up all your attempts.
+
+For this challenge, you need to create two APIs: one to start the game and another to guess the words.
+
+First, call the api/start to initialize the game, e.g., `curl -X POST http://127.0.0.1:3000/api/start`
+
+```json
+{
+  "message": "The game has started, start guessing the word",
+  "gameId": "350a4fbe-048e-42ad-a818-01a447a96d95",
+  "grid": [["", "", "", "", ""], ["", "", "", "", ""], ..., ["", "", "", "", ""]],
+  "currentRow": 0,
+  "solved": false
+}
+
 ```
 
-### Run
+To guess the word, call the api/guess with the parameter of the guessed word, e.g., `curl http://127.0.0.1:3000/api/guess?gameId=<game_id>&guess=apple`
 
-```console
-spin up
+```json
+{
+  "message": "The game has started, start guessing the word",
+  "gameId": "350a4fbe-048e-42ad-a818-01a447a96d95",
+  "grid": [["a", "p", "p", "l", "e"], ["", "", "", "", ""], ..., ["", "", "", "", ""]],
+  "currentRow": 0,
+  "solved": false
+}
+
 ```
 
-Or, use `spin watch` to run the app and rebuild on any changes to `package.json` or the files in `src`.
-
-Use e.g. `curl -v http://127.0.0.1:3000/hello` to test the endpoint.
