@@ -7,7 +7,7 @@ For this challenge you'll need to use:
 - Spin CLI
 - Your favorite programming [language](https://www.fermyon.com/wasm-languages/webassembly-language-support/) supported in Spin
 - Working with Spin's key-value store.
-- Fermyon cloud or spinkube
+- Fermyon cloud
 
 ## Spec
 
@@ -43,3 +43,8 @@ To guess the word, call the api/guess with the parameter of the guessed word, e.
 
 ```
 
+### Notes:
+
+- If an invalid word is provided in the grid, return an error response.
+- A frontend for the challenge would be great, but it is not compulsory.
+- Last but not least, deploy this application to Fermyon Cloud.

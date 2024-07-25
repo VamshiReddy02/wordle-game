@@ -15,10 +15,11 @@ interface Response {
   gameId?: string,
   grid?: string[][],
   currentRow?: number,
-  solved?: boolean
+  solved?: boolean,
+  correctLetters?: string[]
 }
 
-const dictionary = ["apple", "banana", "cherry", "dates", "elder"];
+const dictionary = ["apple", "again", "alarm", "alone", "along"];
 
 export const handleRequest: HandleRequest = async function (request: HttpRequest): Promise<HttpResponse> {
   const requestId = uuidv4();
@@ -119,13 +120,20 @@ export const handleRequest: HandleRequest = async function (request: HttpRequest
 
     internalGame.grid[internalGame.currentRow] = normalizedGuess.split("");
 
+    const correctLetters = Array(5).fill("_");
+    for (let i = 0; i < normalizedGuess.length; i++) {
+      if (normalizedGuess[i] === internalGame.solution[i]) {
+        correctLetters[i] = normalizedGuess[i];
+      }
+    }
+
     if (normalizedGuess === internalGame.solution) {
       internalGame.solved = true;
       response.message = "Congratulations!";
     } else if (internalGame.currentRow === 5) {
       response.message = `Game over. The word was ${internalGame.solution}.`;
     } else {
-      response.message = "Keep trying!";
+      response.message = `Keep trying! Correct letters: ${correctLetters.filter(l => l !== "_").join(", ")}`;
       internalGame.currentRow++;
     }
 
@@ -135,6 +143,7 @@ export const handleRequest: HandleRequest = async function (request: HttpRequest
     response.grid = internalGame.grid;
     response.currentRow = internalGame.currentRow;
     response.solved = internalGame.solved;
+    response.correctLetters = correctLetters;
 
     return {
       status: 200,
