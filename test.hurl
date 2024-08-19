@@ -3,7 +3,7 @@
 POST http://localhost:3000/api/start
 {
     "message": "The game has started, start guessing the word",
-    "gameId": "2c047c81-45ac-44cb-ac7b-ad8c73f55d8a",
+    "gameId": "c18409cb-adac-42cb-9b9c-29942e76bdec",
     "grid": [
         [
             "",
@@ -55,17 +55,17 @@ HTTP 200
 
 # Test 2
 # Please note, that we will use a different set of values when validating your submission
-GET http://127.0.0.1:3000/api/guess?gameId=2c047c81-45ac-44cb-ac7b-ad8c73f55d8a&guess=along
+GET http://127.0.0.1:3000/api/guess?gameId=c18409cb-adac-42cb-9b9c-29942e76bdec&guess=again
 {
     "message": "Congratulations!",
-    "gameId": "2c047c81-45ac-44cb-ac7b-ad8c73f55d8a",
+    "gameId": "d72f23a3-05e1-4b5e-998f-176fb194f711",
     "grid": [
         [
             "a",
-            "l",
-            "o",
-            "n",
-            "g"
+            "g",
+            "a",
+            "i",
+            "n"
         ],
         [
             "",
@@ -107,11 +107,10 @@ GET http://127.0.0.1:3000/api/guess?gameId=2c047c81-45ac-44cb-ac7b-ad8c73f55d8a&
     "solved": true,
     "correctLetters": [
         "a",
-        "l",
-        "o",
-        "n",
-        "g"
+        "g",
+        "a",
+        "i",
+        "n"
     ]
 }
-
 HTTP 200
